@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import ttk
 from tkinter import filedialog
@@ -5,22 +6,35 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import numpy as np
 from scipy.stats import linregress
-import pandas as pd
+import openpyxl
+
+actual_path = os.path.dirname(os.path.abspath(__file__))
 
 modes = ["Rebote a USC práctico","Comparador USC práctico y teórico"]
 modelos = ["Modelo1","Modelo2"]
 
-x = [1, 2, 3, 4, 5]
-y = [1, 2, 3, 4, 4.8]
+x = []
+y = []
+
 filename = ''
 ## FUNCIONES
 def abrir_dialogo():
-    filename = filedialog.askopenfilenames()
+    filename = filedialog.askopenfilename(initialdir=actual_path)
     print(filename)
-    df = pd.read_excel(filename)
-    x = df["x"]
-    y = df["y"]
-    return filename, x, y
+    excel_file = openpyxl.load_workbook(filename)
+    sheet = excel_file.active
+    for i, row in enumerate(sheet):
+        if i == 0:
+            continue
+        x_value = row[0].value
+        x.append(x_value)
+    for i, row in enumerate(sheet):
+        if i == 0:
+            continue
+        y_value = row[1].value
+        y.append(y_value)
+    print(x, y)
+    return
 
 def plotter():
     xx = np.array(x)
@@ -36,7 +50,7 @@ def plotter():
     canvas.draw()
 
 def mostrar_ventana():
-    tkinter.messagebox.showinfo("Mensaje", "Introduzca un nombre para su proyecto")
+    tkinter.messagebox.showwarning("Mensaje", "Introduzca un nombre para su proyecto")
 
 def guardar():
     texto_nombre = name_entry.get()
@@ -47,7 +61,6 @@ def guardar():
     return texto_nombre
 
 ventana = tkinter.Tk()
-#ventana.geometry('600x400')
 ventana.title("USC a partir de Martillo Schmidt")
 
 ## MARCO INFORMACION
