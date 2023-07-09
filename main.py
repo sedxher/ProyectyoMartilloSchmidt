@@ -86,33 +86,33 @@ info_frame =tkinter.LabelFrame(frame)
 info_frame.grid(row= 0, column=0, sticky="nsew", padx=20, pady=10)
 
 # Nombre del proyecto
-project_name = tkinter.Label(info_frame, text="Nombre del proyecto")
-project_name.grid(row=0, column=0)
+project_name = tkinter.Label(info_frame, text="Nombre")
+project_name.grid(row=0, column=0, padx=5, pady=5)
 name_entry = tkinter.Entry(info_frame)
-name_entry.grid(row=0, column=1)
+name_entry.grid(row=0, column=1, sticky="w", padx=5, pady=5)
 
 # Modo
 mode_label = tkinter.Label(info_frame, text="Modo")
 mode_combobox = ttk.Combobox(info_frame, values=modes)
-mode_label.grid(row=4, column=0)
-mode_combobox.grid(row=4, column=1)
+mode_label.grid(row=2, column=0, sticky="w", padx=5, pady=5)
+mode_combobox.grid(row=2, column=1)
 
 # Modelo
 model_label = tkinter.Label(info_frame, text="Modelo")
 model_combobox = ttk.Combobox(info_frame, values=models)
-model_label.grid(row=6, column=0)
-model_combobox.grid(row=6, column=1)
+model_label.grid(row=2, column=2, padx=5, pady=5)
+model_combobox.grid(row=2, column=3, padx=5, pady=5)
 
 # Abrir
 open_button = tkinter.Button(info_frame, text="Abrir", command=abrir_dialogo)
-open_button.grid(row=5, column=7, sticky='E')
+open_button.grid(row=0, column=3, sticky='nsew', padx=5, pady=5)
 
 ## MARCO FIGURA
 figure_frame = tkinter.LabelFrame(frame)
 figure_frame.grid(row=1, column=0, sticky="news", padx=20, pady=5)
 
 # Crear figura de Matplotlib
-fig = Figure(figsize=(4, 4), dpi=100)
+fig = Figure(figsize=(4.2, 4.2), dpi=100)
 ax = fig.add_subplot(111)
 canvas = FigureCanvasTkAgg(fig, master=figure_frame)
 canvas.get_tk_widget().grid(row=0, column=0, sticky="news")
@@ -122,9 +122,9 @@ buttons_frame = tkinter.LabelFrame(frame)
 buttons_frame.grid(row=2, column=0, sticky="news", padx=20, pady=10)
 
 run_button = tkinter.Button(buttons_frame, text="Calcular", command=plotter)
-run_button.grid(row=0, column=0, sticky="sw", columnspan=2, padx=10, pady=10)
+run_button.grid(row=0, column=0, sticky="w", padx=10, pady=10)
 
 save_button = tkinter.Button(buttons_frame, text="Guardar", command=guardar)
-save_button.grid(row=0, column=3, sticky="se", columnspan=5, padx=10, pady=10)
+save_button.grid(row=0, column=2, sticky="e", padx=10, pady=10)
 
 ventana.mainloop()
