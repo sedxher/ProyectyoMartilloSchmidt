@@ -99,7 +99,7 @@ mode_combobox.grid(row=4, column=1)
 
 # Modelo
 model_label = tkinter.Label(info_frame, text="Modelo")
-model_combobox = ttk.Combobox(info_frame, values=modelos)
+model_combobox = ttk.Combobox(info_frame, values=models)
 model_label.grid(row=6, column=0)
 model_combobox.grid(row=6, column=1)
 
